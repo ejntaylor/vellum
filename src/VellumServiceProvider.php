@@ -10,6 +10,19 @@ use Ejntaylor\Vellum\Commands\VellumCommand;
 
 class VellumServiceProvider extends PackageServiceProvider
 {
+
+
+    public function boot()
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'vellum');
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../dist/css' => public_path('vendor/ejntaylor/vellum/css'),
+            ], 'vellum-assets');
+        }
+    }
+
     public function configurePackage(Package $package): void
     {
         /*
