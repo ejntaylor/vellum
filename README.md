@@ -5,7 +5,13 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/ejntaylor/vellum/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/ejntaylor/vellum/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/ejntaylor/vellum.svg?style=flat-square)](https://packagist.org/packages/ejntaylor/vellum)
 
-This is a package providing a Simple UI for [Laravel Folio](http://github.com/laravel/folio) that provides a simple UI for managing your blog content. View all your posts, create new ones, edit existing ones, and delete them.
+This is a package providing a Simple UI for [Laravel Folio](http://github.com/laravel/folio) that provides a simple UI and Markdown editor for managing your blog content. View all your posts, create new ones, edit existing ones, and delete them.
+
+<img width="1292" alt="image" src="https://github.com/ejntaylor/vellum/assets/2080025/bce3fc58-35d3-4f4e-aad3-383295b0460e">
+
+<img width="1268" alt="image" src="https://github.com/ejntaylor/vellum/assets/2080025/8a2f518a-fb99-49b4-81c5-fc9f7e3aebf5">
+
+
 
 ## Installation
 
