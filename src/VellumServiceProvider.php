@@ -2,16 +2,14 @@
 
 namespace Ejntaylor\Vellum;
 
+use Ejntaylor\Vellum\Commands\VellumCommand;
 use Ejntaylor\Vellum\Http\Controllers\VellumController;
 use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Ejntaylor\Vellum\Commands\VellumCommand;
 
 class VellumServiceProvider extends PackageServiceProvider
 {
-
-
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'vellum');
@@ -41,7 +39,7 @@ class VellumServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        Route::middleware(['web',config('vellum.middleware.auth')])->group(function () {
+        Route::middleware(['web', config('vellum.middleware.auth')])->group(function () {
             Route::get('/vellum', [VellumController::class, 'index'])->name('vellum.index');
             Route::get('/vellum/posts/create', [VellumController::class, 'create']);
             Route::get('/vellum/posts/edit/{slug}', [VellumController::class, 'edit']);

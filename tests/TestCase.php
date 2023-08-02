@@ -2,9 +2,9 @@
 
 namespace Ejntaylor\Vellum\Tests;
 
+use Ejntaylor\Vellum\VellumServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Ejntaylor\Vellum\VellumServiceProvider;
 
 class TestCase extends Orchestra
 {

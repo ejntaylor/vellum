@@ -2,8 +2,8 @@
 
 namespace Ejntaylor\Vellum\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Closure;
+use Illuminate\Http\Request;
 
 class AuthMiddleware
 {
@@ -13,6 +13,6 @@ class AuthMiddleware
             return $next($request);
         }
 
-        throw new \Exception("Unauthenticated.");
+        return redirect()->route('login');
     }
 }
