@@ -34,24 +34,19 @@ class VellumServiceProvider extends PackageServiceProvider
             ->name('vellum')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_category_table')
-            ->hasMigration('create_posts_table')
             ->hasCommand(VellumCommand::class);
+
+        $this->mergeConfigFrom(__DIR__.'/../config/vellum.php', 'vellum');
     }
 
     public function packageRegistered()
     {
-        Route::get('/vellum', [VellumController::class, 'index'])->name('vellum.index');
-        Route::get('/vellum/posts/create', [VellumController::class, 'create']);
-        Route::get('/vellum/posts/edit/{slug}', [VellumController::class, 'edit']);
-        Route::post('/vellum/posts/update', [VellumController::class, 'store']);
-        Route::get('/vellum/categories', [VellumController::class, 'categories']);
-
-
-//        Route::macro('vellum', function (string $baseUrl) {
-//            Route::prefix($baseUrl)->group(function () {
-//                Route::get('/', [VellumController::class, 'index']);
-//            });
-//        });
+        Route::middleware(config('vellum.middleware.auth'))->group(function () {
+            Route::get('/vellum', [VellumController::class, 'index'])->name('vellum.index');
+            Route::get('/vellum/posts/create', [VellumController::class, 'create']);
+            Route::get('/vellum/posts/edit/{slug}', [VellumController::class, 'edit']);
+            Route::post('/vellum/posts/update', [VellumController::class, 'store']);
+            Route::get('/vellum/categories', [VellumController::class, 'categories']);
+        });
     }
 }
