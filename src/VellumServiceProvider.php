@@ -41,7 +41,7 @@ class VellumServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        Route::middleware(config('vellum.middleware.auth'))->group(function () {
+        Route::middleware(['web',config('vellum.middleware.auth')])->group(function () {
             Route::get('/vellum', [VellumController::class, 'index'])->name('vellum.index');
             Route::get('/vellum/posts/create', [VellumController::class, 'create']);
             Route::get('/vellum/posts/edit/{slug}', [VellumController::class, 'edit']);
