@@ -12,12 +12,14 @@
                     <div class="flex h-16 items-center justify-between px-4 sm:px-0">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <a href="/vellum" class="bg-grey-100 text-white font-bold border border-white border-dashed py-2 px-4 rounded-md">Vellum</a>
+                                <a href="/vellum"
+                                   class="bg-grey-100 text-white font-bold border border-white border-dashed py-2 px-4 rounded-md">Vellum</a>
                             </div>
                             <div class="hidden md:block">
                                 <div class="ml-10 flex items-baseline space-x-4">
-                                    <a href="/" class="bg-gray-300 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                       aria-current="page">Docs</a>
+                                    <a href="/"
+                                       class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                                    >Your Site</a>
                                     <a href="#"
                                        class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">GitHub</a>
                                 </div>
