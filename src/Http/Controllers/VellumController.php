@@ -12,11 +12,6 @@ class VellumController
 {
     private $viewsPath = 'views/pages/';
 
-    public function dashboard(): View
-    {
-        return view('vellum::dashboard');
-    }
-
     public function index(): View
     {
         $files = glob(resource_path($this->viewsPath . '*.blade.php'));

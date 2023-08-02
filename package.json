@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "build:css": "postcss resources/css/app.css -o dist/css/app.css",
+        "build:css": "postcss resources/css/app.css -o dist/css/app.css"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.14",

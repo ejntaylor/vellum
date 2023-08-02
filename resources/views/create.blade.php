@@ -1,12 +1,22 @@
-@extends('vellum::layouts.layout')
+@extends('vellum::layouts.layout-markdown')
 
-@section('title', 'Create Post')
+@push('title')
+    Create a Post
+@endpush
+
+@push('additional-content')
+    <div class="mt-2 md:flex md:items-center md:justify-between">
+        <div class="mt-4 flex flex-shrink-0 md:ml-4 md:mt-0">
+            <button onclick="document.getElementById('post-create').submit();"
+                    class="ml-3 inline-flex items-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                Publish
+            </button>
+        </div>
+    </div>
+@endpush
 
 @section('content')
-
-    <h2 class="font-semibold mb-4">Create a Post</h2>
-
-    <form action="/vellum/posts/update" method="POST">
+    <form action="/vellum/posts/update" method="POST" id="post-create">
         @csrf
 
         <div class="mb-4">
@@ -25,15 +35,8 @@
                 <textarea id="content" name="content" rows="3"
                           class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
             </div>
-            <p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
+            <p class="mt-3 text-sm leading-6 text-gray-600">Go on! Write a few sentences.</p>
         </div>
 
-        <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-            <button type="submit"
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                Save
-            </button>
-        </div>
     </form>
 @endsection
