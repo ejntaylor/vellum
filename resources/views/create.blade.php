@@ -1,4 +1,4 @@
-@extends('vellum::layout')
+@extends('vellum::layouts.layout')
 
 @section('title', 'Create Post')
 

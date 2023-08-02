@@ -1,13 +1,25 @@
-@extends('vellum::layout')
+@extends('vellum::layouts.layout-markdown')
 
 @section('title', 'Create Post')
 
 @section('content')
 
-    <h2 class="font-semibold mb-4">Post Edit: {{$slug}}</h2>
-
     <form action="/vellum/posts/update" method="POST">
         @csrf
+
+
+        <div class="-ml-4 -mt-2 mb-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
+            <div class="ml-4 mt-2">
+                <h3 class="text-base font-semibold leading-6 text-gray-900">Post Edit: {{$slug}}</h3>
+            </div>
+            <div class="ml-4 mt-2 flex-shrink-0">
+                <button type="submit"
+                        class="relative inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Update
+                </button>
+            </div>
+        </div>
+
         <div>
             <div class="mt-2">
                 <div id="tabs-1-panel-1" class="-m-0.5 rounded-lg p-0.5" aria-labelledby="tabs-1-tab-1" role="tabpanel"
@@ -22,12 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-2 flex justify-end">
-            <button type="submit"
-                    class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                Update
-            </button>
-        </div>
+
     </form>
 
 @endsection
