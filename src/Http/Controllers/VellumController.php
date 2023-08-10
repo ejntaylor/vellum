@@ -85,6 +85,21 @@ class VellumController
             ]);
     }
 
+    public function destroy(Request $request): RedirectResponse
+    {
+        $slug = $request->input('slug');
+        $filePath = resource_path($this->viewsPath.$slug.'.blade.php');
+
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+        }
+
+        return Redirect::route('vellum.index')
+            ->with('deleted', [
+                'slug' => $slug,
+            ]);
+    }
+
     public function post(): View
     {
         return view('vellum::post');

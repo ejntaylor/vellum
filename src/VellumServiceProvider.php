@@ -45,6 +45,7 @@ class VellumServiceProvider extends PackageServiceProvider
             Route::get('/vellum/posts/edit/{slug}', [VellumController::class, 'edit']);
             Route::post('/vellum/posts/update', [VellumController::class, 'store']);
             Route::get('/vellum/categories', [VellumController::class, 'categories']);
+            Route::delete('/vellum/posts/delete/', [VellumController::class, 'destroy']);
         });
     }
 }
