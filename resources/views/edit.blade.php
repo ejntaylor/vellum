@@ -9,6 +9,10 @@
         <div class="mt-4 flex flex-shrink-0 md:ml-4 md:mt-0">
             <a href="/{{$slug}}" target="_blank"
                class="inline-flex items-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20">View</a>
+            <button onclick="document.getElementById('post-delete').submit();"
+                    class="ml-3 inline-flex items-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">
+                Delete
+            </button>
             <button onclick="document.getElementById('post-edit').submit();"
                     class="ml-3 inline-flex items-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                 Publish
@@ -19,6 +23,12 @@
 
 
 @section('content')
+
+    <form action="/vellum/posts/delete/" method="POST" id="post-delete" onsubmit="return confirm('Are you sure you want to delete this post?');">
+        @method('DELETE')
+        @csrf
+        <input type="hidden" name="slug" value="{{$slug}}">
+    </form>
 
     <form action="/vellum/posts/update" method="POST" id="post-edit">
         @csrf
