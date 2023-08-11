@@ -10,15 +10,22 @@ use Illuminate\Support\Facades\Redirect;
 
 class VellumController
 {
-    private $viewsPath = 'views/pages/';
+    protected string $extension;
+
+    private string $viewsPath = 'views/pages/';
+
+    public function __construct()
+    {
+        $this->extension = $this->getDefaultExtension();
+    }
 
     public function index(): View
     {
-        $files = glob(resource_path($this->viewsPath.'*.blade.php'));
+        $files = glob(resource_path($this->viewsPath.'*'.$this->extension));
         $posts = [];
 
         foreach ($files as $file) {
-            $fileName = basename($file, '.blade.php');
+            $fileName = basename($file, $this->extension);
 
             $posts[] = [
                 'name' => $fileName,
@@ -45,7 +52,7 @@ class VellumController
     {
 
         $directoryPath = resource_path($this->viewsPath);
-        $filePath = resource_path($this->viewsPath.$slug.'.blade.php');
+        $filePath = resource_path($this->viewsPath.$slug.$this->extension);
 
         if (! File::isDirectory($directoryPath)) {
             File::makeDirectory($directoryPath, 0755, true);
@@ -69,7 +76,7 @@ class VellumController
         $content = $request->input('content');
         $slug = $request->input('slug');
         $directoryPath = resource_path($this->viewsPath);
-        $filePath = resource_path($this->viewsPath.$slug.'.blade.php');
+        $filePath = resource_path($this->viewsPath.$slug.$this->extension);
 
         if (! File::isDirectory($directoryPath)) {
             File::makeDirectory($directoryPath, 0755, true);
@@ -88,7 +95,7 @@ class VellumController
     public function destroy(Request $request): RedirectResponse
     {
         $slug = $request->input('slug');
-        $filePath = resource_path($this->viewsPath.$slug.'.blade.php');
+        $filePath = resource_path($this->viewsPath.$slug.$this->extension);
 
         if (File::exists($filePath)) {
             File::delete($filePath);
@@ -108,5 +115,30 @@ class VellumController
     public function categories(): View
     {
         return view('vellum::categories');
+    }
+
+    public function toggleMarkdown(): RedirectResponse
+    {
+        $this->toggleMarkdownInSession();
+
+        return Redirect::route('vellum.index');
+    }
+
+    private function toggleMarkdownInSession(): void
+    {
+        $usingMarkdown = $this->isUsingMarkdown();
+        session(['markdown' => ! $usingMarkdown]);
+
+        $this->extension = ! $usingMarkdown ? '.md' : '.blade.php';
+    }
+
+    private function isUsingMarkdown(): bool
+    {
+        return session('markdown', false);
+    }
+
+    private function getDefaultExtension(): string
+    {
+        return $this->isUsingMarkdown() ? '.md' : '.blade.php';
     }
 }
