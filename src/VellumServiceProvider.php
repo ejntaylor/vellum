@@ -46,6 +46,8 @@ class VellumServiceProvider extends PackageServiceProvider
             Route::post('/vellum/posts/update', [VellumController::class, 'store']);
             Route::get('/vellum/categories', [VellumController::class, 'categories']);
             Route::delete('/vellum/posts/delete/', [VellumController::class, 'destroy']);
+
+            Route::post('/vellum/toggle-markdown/', [VellumController::class, 'toggleMarkdown'])->name('vellum.toggle-markdown');
         });
     }
 }
