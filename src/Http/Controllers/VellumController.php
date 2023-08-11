@@ -67,7 +67,6 @@ class VellumController
         $content = $this->markdownService->getContent($fileContent);
         $frontMatter = $this->markdownService->getFrontMatter($fileContent);
 
-
         return view('vellum::edit', [
             'file' => $filePath,
             'content' => $content,
@@ -82,7 +81,7 @@ class VellumController
         $frontMatter = $request->input('front-matter');
         $validated = $this->markdownService->validateFrontMatter($frontMatter);
 
-        if (!$validated) {
+        if (! $validated) {
             return Redirect::back()
                 ->withErrors($validated)
                 ->withInput();
