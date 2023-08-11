@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class VellumController
 {
-
     protected string $extension;
 
     private string $viewsPath = 'views/pages/';
@@ -128,9 +127,9 @@ class VellumController
     private function toggleMarkdownInSession(): void
     {
         $usingMarkdown = $this->isUsingMarkdown();
-        session(['markdown' => !$usingMarkdown]);
+        session(['markdown' => ! $usingMarkdown]);
 
-        $this->extension = !$usingMarkdown ? '.md' : '.blade.php';
+        $this->extension = ! $usingMarkdown ? '.md' : '.blade.php';
     }
 
     private function isUsingMarkdown(): bool
