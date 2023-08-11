@@ -2,6 +2,7 @@
 
 namespace Ejntaylor\Vellum\Http\Controllers;
 
+use Ejntaylor\Vellum\Services\MarkdownService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class VellumController
 
     private string $viewsPath = 'views/pages/';
 
-    public function __construct()
+    public function __construct(public MarkdownService $markdownService)
     {
         $this->extension = $this->getDefaultExtension();
     }
@@ -35,6 +36,7 @@ class VellumController
         }
 
         $saved = session('saved', false);
+
 
         return view('vellum::index', [
             'files' => $files,
@@ -62,11 +64,14 @@ class VellumController
             abort(404, 'File not found.');
         }
 
-        $content = File::get($filePath);
+        $fileContent = File::get($filePath);
+        $content = $this->markdownService->getContent($fileContent);
+        $frontMatter = $this->markdownService->getFrontMatter($fileContent);
 
         return view('vellum::edit', [
             'file' => $filePath,
             'content' => $content,
+            'frontMatter' => $frontMatter,
             'slug' => $slug,
         ]);
     }
@@ -74,6 +79,16 @@ class VellumController
     public function store(Request $request): RedirectResponse
     {
         $content = $request->input('content');
+        $frontMatter = $request->input('front-matter');
+        $validated = $this->markdownService->validateFrontMatter($frontMatter);
+
+        if (! $validated) {
+            return Redirect::back()
+                ->withErrors($validated)
+                ->withInput();
+        }
+
+        $fileContent = $this->markdownService->mergeFrontMatterAndContent($frontMatter, $content);
         $slug = $request->input('slug');
         $directoryPath = resource_path($this->viewsPath);
         $filePath = resource_path($this->viewsPath.$slug.$this->extension);
@@ -82,7 +97,7 @@ class VellumController
             File::makeDirectory($directoryPath, 0755, true);
         }
 
-        if (File::put($filePath, $content) === false) {
+        if (File::put($filePath, $fileContent) === false) {
             abort(500, 'Error writing to file.');
         }
 
