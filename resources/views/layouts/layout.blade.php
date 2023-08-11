@@ -26,29 +26,24 @@
                             </div>
                         </div>
 
-                       <div class="flex">
-                           <div>
-                               <form method="POST" action="{{ route('vellum.toggle-markdown') }}" class="m-0">
-                                   @csrf
+                        <div class="flex">
+                            <form method="POST" action="{{ route('vellum.toggle-markdown') }}" class="m-0">
+                                @csrf
 
-                                   <button type="submit"
-                                           class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-                                       {{ session('markdown', false) ? 'Switch to Blade' : 'Switch to Markdown' }}
-                                   </button>
-                               </form>
-                           </div>
+                                <button type="submit"
+                                        class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                    {{ session('markdown', false) ? 'Switch to Blade' : 'Switch to Markdown' }}
+                                </button>
+                            </form>
+                            <form method="POST" action="{{ route('logout') }}" class="m-0">
+                                @csrf
 
-                           <div>
-                               <form method="POST" action="{{ route('logout') }}" class="m-0">
-                                   @csrf
-
-                                   <button type="submit"
-                                           class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-                                       Logout
-                                   </button>
-                               </form>
-                           </div>
-                       </div>
+                                <button type="submit"
+                                        class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
 
                         <div class="-mr-2 flex md:hidden">
                         </div>
