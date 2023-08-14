@@ -18,6 +18,12 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
+      - name: Setup GPG
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+          git config --global user.signingkey 1A5D21A30EF6ADDE
+          git config --global commit.gpgsign true
+
       - name: Fix PHP code style issues
         uses: aglipanci/laravel-pint-action@2.3.0
 
@@ -25,3 +31,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Fix styling
+          commit_options: '--no-verify --gpg-sign'
