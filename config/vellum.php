@@ -5,4 +5,7 @@ return [
     'middleware' => [
         'auth' => 'auth',
     ],
+    'routes' => [
+        'logout' => 'logout',
+    ],
 ];

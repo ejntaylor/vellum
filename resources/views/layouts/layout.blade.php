@@ -35,7 +35,9 @@
                                     {{ session('markdown', false) ? 'Switch to Blade' : 'Switch to Markdown' }}
                                 </button>
                             </form>
-                            <form method="POST" action="{{ route('logout') }}" class="m-0">
+
+                            @if(Route::has(config('vellum.routes.logout')))
+                            <form method="POST" action="{{ route(config('vellum.routes.logout')) }}" class="m-0">
                                 @csrf
 
                                 <button type="submit"
@@ -43,6 +45,8 @@
                                     Logout
                                 </button>
                             </form>
+                            @endif
+
                         </div>
 
                         <div class="-mr-2 flex md:hidden">
@@ -75,7 +79,6 @@
     </main>
 </div>
 
-@stack('scripts')
 
 </body>
 </html>

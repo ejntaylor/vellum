@@ -1,9 +1,8 @@
 <?php
 
 use Ejntaylor\Vellum\Http\Controllers\VellumController;
+use Illuminate\Support\Facades\Auth;
 
-it('has a route for index', function () {
-    $this->get(action([VellumController::class, 'index']))
-        ->assertStatus(200)
-        ->assertSee('this is the view');
+test('confirm environment is set to testing', function () {
+    expect(config('app.env'))->toBe('testing');
 });

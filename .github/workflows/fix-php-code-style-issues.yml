@@ -18,6 +18,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
+      - name: Setup Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Fix PHP code style issues
         uses: aglipanci/laravel-pint-action@2.3.0
 
@@ -25,3 +30,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Fix styling
+          commit_user_name: 'GitHub Actions Bot'
+          commit_user_email: '41898282+github-actions[bot]@users.noreply.github.com'
