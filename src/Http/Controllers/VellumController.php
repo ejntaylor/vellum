@@ -37,7 +37,6 @@ class VellumController
 
         $saved = session('saved', false);
 
-
         return view('vellum::index', [
             'files' => $files,
             'posts' => $posts,
